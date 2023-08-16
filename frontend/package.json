@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev-mini": "vite --port 3000",
+    "dev": "concurrently \"npm run dev-mini\" \"webxdc-dev run http://localhost:3000\"",
+    "build": "vite build",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ionic/react": "^7.0.0",
+    "@ionic/react-router": "^7.0.0",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "ionicons": "^7.0.0",
+    "preact": "^10.17.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^5.3.4",
+    "react-router-dom": "^5.3.4"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.5.0",
+    "concurrently": "^8.1.0",
+    "eruda": "^3.0.0",
+    "toml": "^3.0.0",
+    "vite-plugin-zip-pack": "^1.0.5",
+    "webxdc-dev": "^0.17.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@vitejs/plugin-legacy": "^4.0.2",
+    "@vitejs/plugin-react": "^4.0.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.3.9",
+    "vitest": "^0.32.2"
+  }
+}
