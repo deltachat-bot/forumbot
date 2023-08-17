@@ -18,8 +18,11 @@ dependencies:
     specifier: ^5.3.3
     version: 5.3.3
   ionicons:
-    specifier: ^7.0.0
+    specifier: ^7.1.2
     version: 7.1.2
+  luxon:
+    specifier: ^3.4.0
+    version: 3.4.0
   preact:
     specifier: ^10.17.0
     version: 10.17.0
@@ -46,6 +49,15 @@ devDependencies:
   '@testing-library/user-event':
     specifier: ^14.4.3
     version: 14.4.3(@testing-library/dom@9.3.1)
+  '@types/luxon':
+    specifier: ^3.3.1
+    version: 3.3.1
+  '@types/react':
+    specifier: ^18.0.27
+    version: 18.2.20
+  '@types/react-dom':
+    specifier: ^18.0.10
+    version: 18.2.7
   '@vitejs/plugin-legacy':
     specifier: ^4.0.2
     version: 4.1.1(terser@5.19.2)(vite@4.4.9)
@@ -1828,6 +1840,10 @@ packages:
       pretty-format: 29.6.2
     dev: true
 
+  /@types/luxon@3.3.1:
+    resolution: {integrity: sha512-XOS5nBcgEeP2PpcqJHjCWhUCAzGfXIU8ILOSLpx2FhxqMW9KdxgCGXNOEKGVBfveKtIpztHzKK5vSRVLyW/NqA==}
+    dev: true
+
   /@types/node@20.5.0:
     resolution: {integrity: sha512-Mgq7eCtoTjT89FqNoTzzXg2XvCi5VMhRV6+I2aYanc6kQCBImeNaAYRs/DyoVqk1YEUJK5gN9VO7HRIdz4Wo3Q==}
     dev: true
@@ -3145,6 +3161,11 @@ packages:
     dependencies:
       yallist: 3.1.1
     dev: true
+
+  /luxon@3.4.0:
+    resolution: {integrity: sha512-7eDo4Pt7aGhoCheGFIuq4Xa2fJm4ZpmldpGhjTYBNUYNCN6TIEP6v7chwwwt3KRp7YR+rghbfvjyo3V5y9hgBw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}

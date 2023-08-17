@@ -1,22 +1,49 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import {
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonMenuButton,
+  IonNote,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import { chatbubbleOutline, heart } from "ionicons/icons";
+import { MockData } from "../store";
+import "./Home.css";
 
-const Home: React.FC = () => {
+const Home = () => {
+  const community = MockData[0];
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Blank</IonTitle>
+          <IonTitle>Forum: {community.name}</IonTitle>
+          {/* <IonMenuButton i> */}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <IonNote>{community.description}</IonNote>
+        <IonList>
+          {community.posts.map((post) => (
+            <IonItem routerLink={`/${community.name}/${post.id}`} detail>
+              <IonLabel>
+                <h1>{post.title}</h1>
+                <IonNote>{post.body}</IonNote>
+              </IonLabel>
+              <IonNote slot="end">
+                {post.createdAt.toRelative()}
+                <br />
+                {post.likes}<IonIcon icon={heart} />
+                {post.commentCount}<IonIcon icon={chatbubbleOutline} />
+              </IonNote>
+            </IonItem>
+          ))}
+        </IonList>
       </IonContent>
     </IonPage>
   );

@@ -1,0 +1,34 @@
+.post {
+  padding: 0px 12px;
+}
+
+.comment {
+  padding: 2px 1px;
+}
+
+.comments {
+  padding-left: 8px;
+  border-left: 1.2px solid var(--ion-color-medium);
+}
+
+.post-comments {
+  margin: 14px;
+}
+
+.reply-modal {
+}
+
+.reply-modal > textarea {
+  height: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 5px 10px;
+}
+.divider-line {
+  border-bottom: 1px solid var(--ion-color-medium);
+  flex-grow: 1;
+  margin-inline-end: 5px;
+}
