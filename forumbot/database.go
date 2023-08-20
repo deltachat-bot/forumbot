@@ -10,7 +10,7 @@ import (
 )
 
 type Post struct {
-	Id        uint64 `gorm:"primaryKey";autoIncrement:true"`
+	Id        uint64 `gorm:"primaryKey;autoIncrement:true"`
 	Author    deltachat.ContactId
 	Title     string
 	Body      string

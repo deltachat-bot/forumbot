@@ -18,7 +18,7 @@ func onEvent(bot *deltachat.Bot, accId deltachat.AccountId, event deltachat.Even
 			return
 		}
 		var rawUpdates []json.RawMessage
-		err = json.Unmarshal([]byte(data), rawUpdates)
+		err = json.Unmarshal([]byte(data), &rawUpdates)
 		if err != nil {
 			cli.Logger.Error(err)
 			return

@@ -14,7 +14,7 @@ type StatusUpdate[T any] struct {
 // handle a webxdc status update
 func handleStatusUpdate(bot *deltachat.Bot, accId deltachat.AccountId, msgId deltachat.MsgId, rawUpdate json.RawMessage) {
 	var update StatusUpdate[string]
-	err := json.Unmarshal(rawUpdate, update)
+	err := json.Unmarshal(rawUpdate, &update)
 	if err != nil {
 		cli.Logger.Error(err)
 		return
