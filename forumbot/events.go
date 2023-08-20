@@ -73,7 +73,8 @@ func sendApp(bot *deltachat.Bot, accId deltachat.AccountId, chatId deltachat.Cha
 		cli.Logger.Error(err)
 		return
 	}
-	for _, msgId := range msgIds {
+	for i := len(msgIds)-1; i >= 0; i-- {
+		msgId := msgIds[i]
 		msg, err := bot.Rpc.GetMessage(accId, msgId)
 		if err != nil {
 			cli.Logger.Error(err)
