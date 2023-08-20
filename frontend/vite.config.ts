@@ -7,7 +7,6 @@ import * as toml from "toml";
 
 const manifest = toml.parse(readFileSync("./public/manifest.toml", "utf-8"));
 let name = manifest.name || "app";
-let version = manifest.version ? "_" + manifest.version : "";
 
 function eruda(debug = undefined) {
   const erudaSrc = readFileSync("./node_modules/eruda/eruda.js", "utf-8");
@@ -55,8 +54,8 @@ export default defineConfig({
     // @ts-ignore
     eruda(),
     zipPack({
-      outDir: "dist-xdc",
-      outFileName: name + version + ".xdc",
+      outDir: "../forumbot/embed/",
+      outFileName: name + ".xdc",
     }),
   ],
 });

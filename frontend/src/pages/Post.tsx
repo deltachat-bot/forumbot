@@ -40,7 +40,7 @@ interface PostPageProps
 
 const PostPage: React.FC<PostPageProps> = ({ match }) => {
   const post = MockData.find(
-    ({ name }) => name === match.params.community
+    ({ name }) => name === match.params.community,
   )?.posts.find(({ id }) => id === match.params.postId)!;
 
   // TODO handle post not found

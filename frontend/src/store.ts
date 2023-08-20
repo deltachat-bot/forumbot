@@ -29,7 +29,7 @@ export namespace Types {
 function mCommunity(
   name: string,
   description: string,
-  posts: Types.Post[]
+  posts: Types.Post[],
 ): Types.Community {
   return { name, description, posts };
 }
@@ -39,7 +39,7 @@ function mPost(
   title: string,
   body: string,
   createdAt: DateTime,
-  comments: Types.Comment[]
+  comments: Types.Comment[],
 ) {
   return {
     id,
@@ -97,7 +97,7 @@ export const MockData = [
           createdAt: DateTime.now().minus({ minutes: 7 }),
           likes: Math.floor(Math.random() * 10),
         },
-      ]
+      ],
     ),
     mPost(
       "45678999",
@@ -150,7 +150,7 @@ export const MockData = [
           createdAt: DateTime.now().minus({ minutes: 16 }),
           likes: Math.floor(Math.random() * 10),
         },
-      ]
+      ],
     ),
   ]),
 ];
@@ -158,7 +158,7 @@ function countNestedComments(comments: Types.Comment[]): number {
   return (
     comments.reduce(
       (preValue, current) => preValue + countNestedComments(current.comments),
-      0
+      0,
     ) + comments.length
   );
 }

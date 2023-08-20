@@ -43,4 +43,4 @@ environment variable to "debug":
 NODE_ENV=debug pnpm build
 ```
 
-The resulting optimized `.xdc` file is saved in `dist-xdc/` folder.
+The resulting optimized `.xdc` file is saved in `../forumbot/embed/` folder.

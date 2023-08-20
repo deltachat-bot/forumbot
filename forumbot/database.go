@@ -3,27 +3,26 @@ package main
 import (
 	"time"
 
-	"gorm.io/gorm"
-	"gorm.io/driver/sqlite"
-	"go.uber.org/zap"
 	"github.com/deltachat/deltachat-rpc-client-go/deltachat"
+	"github.com/glebarez/sqlite"
+	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 type Post struct {
-	Id uint64 `gorm:"primaryKey";autoIncrement:true"`
-	Title string
-	Body  string
-	Author deltachat.ContactId
+	Id        uint64 `gorm:"primaryKey";autoIncrement:true"`
+	Author    deltachat.ContactId
+	Title     string
+	Body      string
 	CreatedAt time.Time
+	InReplyTo uint64
+	Thread    uint64
 	Community string
 }
 
-type Comment struct {
-	Id uint64 `gorm:"primaryKey";autoIncrement:true"`
+type Like struct {
+	User deltachat.ContactId
 	Post uint64
-	Body  string
-	Author deltachat.ContactId
-	CreatedAt time.Time
 }
 
 func initDB(path string, logger *zap.Logger) *gorm.DB {
@@ -34,7 +33,16 @@ func initDB(path string, logger *zap.Logger) *gorm.DB {
 	}
 
 	// Migrate the schema
-	db.AutoMigrate(&Channel{})
+	err = db.AutoMigrate(&Post{})
+	if err != nil {
+		logger.Error(err.Error())
+		panic(err)
+	}
+	err = db.AutoMigrate(&Like{})
+	if err != nil {
+		logger.Error(err.Error())
+		panic(err)
+	}
 
 	return db
 }

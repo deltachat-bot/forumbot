@@ -38,8 +38,10 @@ const Home = () => {
               <IonNote slot="end">
                 {post.createdAt.toRelative()}
                 <br />
-                {post.likes}<IonIcon icon={heart} />
-                {post.commentCount}<IonIcon icon={chatbubbleOutline} />
+                {post.likes}
+                <IonIcon icon={heart} />
+                {post.commentCount}
+                <IonIcon icon={chatbubbleOutline} />
               </IonNote>
             </IonItem>
           ))}

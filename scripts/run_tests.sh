@@ -21,10 +21,12 @@ then
 fi
 
 # Install test dependencies
+mkdir -p "$HOME/.cargo/bin/"
+export PATH="$HOME/.cargo/bin/:$PATH"
 if ! command -v deltachat-rpc-server &> /dev/null
 then
     echo "deltachat-rpc-server not found, installing..."
-    curl -L "https://github.com/deltachat/deltachat-core-rust/releases/download/v1.118.0/deltachat-rpc-server-x86_64" -o ~/.cargo/bin/deltachat-rpc-server
+    curl -L "https://github.com/deltachat/deltachat-core-rust/releases/download/v1.119.1/deltachat-rpc-server-x86_64" -o ~/.cargo/bin/deltachat-rpc-server
     chmod +x ~/.cargo/bin/deltachat-rpc-server
 
 fi
