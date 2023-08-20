@@ -5,7 +5,7 @@ go 1.20
 
 require (
 	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9
-	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230803004831-c41345b8ffd8
+	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230803184428-8ffaba76b5c8
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 )

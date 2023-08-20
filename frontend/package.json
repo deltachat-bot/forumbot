@@ -2,10 +2,12 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "tsc && vite build",
     "dev-mini": "vite --port 3000",
     "dev": "concurrently \"npm run dev-mini\" \"webxdc-dev run http://localhost:3000\"",
-    "build": "tsc && vite build",
-    "check": "tsc"
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "tsc && npm run format:check"
   },
   "dependencies": {
     "@ionic/react": "^7.0.0",
@@ -31,6 +33,7 @@
     "@vitejs/plugin-react": "^4.0.1",
     "concurrently": "^8.1.0",
     "eruda": "^3.0.0",
+    "prettier": "^3.0.2",
     "toml": "^3.0.0",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
