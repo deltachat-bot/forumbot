@@ -1,3 +1,4 @@
 *~
 *.out
-forumbot/embed
+src/embed
+dist

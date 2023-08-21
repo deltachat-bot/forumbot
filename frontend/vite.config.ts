@@ -54,7 +54,7 @@ export default defineConfig({
     // @ts-ignore
     eruda(),
     zipPack({
-      outDir: "../forumbot/embed/",
+      outDir: "../src/embed/",
       outFileName: name + ".xdc",
     }),
   ],

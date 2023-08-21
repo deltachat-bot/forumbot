@@ -1,7 +1,7 @@
 #!/bin/env bash
 
 echo "Checking code with gofmt..."
-OUTPUT=`gofmt -d forumbot`
+OUTPUT=`gofmt -d src`
 if [ -n "$OUTPUT" ]
 then
     echo "$OUTPUT"
