@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+# build frontend
+go generate ./...
+
 echo "Checking code with gofmt..."
 OUTPUT=`gofmt -d src`
 if [ -n "$OUTPUT" ]
@@ -13,7 +16,7 @@ if ! command -v golangci-lint &> /dev/null
 then
     echo "golangci-lint not found, installing..."
     # binary will be $(go env GOPATH)/bin/golangci-lint
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.52.2
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.54.2
 fi
 if ! golangci-lint run
 then
@@ -35,9 +38,6 @@ then
     echo "courtney not found, installing..."
     go install github.com/dave/courtney@master
 fi
-
-# build frontend
-go generate ./...
 
 # run the tests
 courtney -v -t="./..." ${TEST_EXTRA_TAGS:--t="-parallel=1"}
