@@ -5,9 +5,10 @@ import (
 
 	"github.com/deltachat/deltachat-rpc-client-go/deltachat"
 	"github.com/glebarez/sqlite"
-	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
+
+var database *gorm.DB
 
 type Post struct {
 	Id        uint64 `gorm:"primaryKey;autoIncrement:true"`
@@ -25,24 +26,23 @@ type Like struct {
 	Post uint64
 }
 
-func initDB(path string, logger *zap.Logger) *gorm.DB {
-	db, err := gorm.Open(sqlite.Open(path), &gorm.Config{})
+func initDB(path string) {
+	var err error
+	database, err = gorm.Open(sqlite.Open(path), &gorm.Config{})
 	if err != nil {
-		logger.Error(err.Error())
+		cli.Logger.Error(err.Error())
 		panic("failed to connect database")
 	}
 
 	// Migrate the schema
-	err = db.AutoMigrate(&Post{})
+	err = database.AutoMigrate(&Post{})
 	if err != nil {
-		logger.Error(err.Error())
+		cli.Logger.Error(err.Error())
 		panic(err)
 	}
-	err = db.AutoMigrate(&Like{})
+	err = database.AutoMigrate(&Like{})
 	if err != nil {
-		logger.Error(err.Error())
+		cli.Logger.Error(err.Error())
 		panic(err)
 	}
-
-	return db
 }
