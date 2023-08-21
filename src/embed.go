@@ -1,3 +1,4 @@
+//go:generate sh -c "cd ../frontend; npm install -g pnpm; pnpm i; pnpm build"
 package main
 
 import _ "embed"

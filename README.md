@@ -33,6 +33,24 @@ Run `forumbot --help` to see all available options.
 
 ## Contributing
 
+### Requirements
+
+You need to have installed:
+- [go](https://go.dev/doc/install)
+- [nodeJS](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [pnpm](https://pnpm.io/installation)
+- [deltachat-rpc-server](https://github.com/deltachat/deltachat-core-rust/tree/master/deltachat-rpc-server)
+- [docker](https://docs.docker.com/get-docker/) (for the local fake email server for testing)
+- [GoReleaser](https://goreleaser.com/install/) (optional, for local releases)
+
+### Building the frontend
+
+To generate the frontend (WebXDC app) that is shipped/embedded inside the bot:
+
+```
+go generate ./...
+```
+
 For development instructions of the frontend check `frontend/README.md`
 
 ### Automated testing
@@ -56,11 +74,13 @@ go run ./...
 
 ### Building from source
 
-After building the frontend, to build the bot, execute in the project root folder:
+Execute in the project root folder:
 
 ```
-go build -o dist/ ./...
+goreleaser build --snapshot --clean --single-target
 ```
+
+The output binary will be in the `dist/` folder
 
 ### Releasing
 
@@ -69,4 +89,10 @@ To automatically build and create a new GitHub release:
 ```
 git tag v1.0.1
 git push origin v1.0.1
+```
+
+To create releases locally:
+
+```
+goreleaser release --snapshot --clean
 ```

@@ -36,6 +36,9 @@ then
     go install github.com/dave/courtney@master
 fi
 
+# build frontend
+go generate ./...
+
 # run the tests
 courtney -v -t="./..." ${TEST_EXTRA_TAGS:--t="-parallel=1"}
 go tool cover -func=coverage.out -o=coverage-percent.out
