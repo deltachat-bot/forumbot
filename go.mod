@@ -1,6 +1,6 @@
 module github.com/deltachat-bot/forumbot
 
-go 1.20
+go 1.21
 
 require (
 	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9
