@@ -73,7 +73,7 @@ func sendApp(bot *deltachat.Bot, accId deltachat.AccountId, chatId deltachat.Cha
 		cli.Logger.Error(err)
 		return
 	}
-	for i := len(msgIds)-1; i >= 0; i-- {
+	for i := len(msgIds) - 1; i >= 0; i-- {
 		msgId := msgIds[i]
 		msg, err := bot.Rpc.GetMessage(accId, msgId)
 		if err != nil {
@@ -86,6 +86,11 @@ func sendApp(bot *deltachat.Bot, accId deltachat.AccountId, chatId deltachat.Cha
 				cli.Logger.Error(err)
 			}
 			return
+		} else {
+			err = bot.Rpc.DeleteMessages(accId, []deltachat.MsgId{msgId})
+			if err != nil {
+				cli.Logger.Error(err)
+			}
 		}
 	}
 
