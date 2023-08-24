@@ -62,8 +62,8 @@ func (self *API) Like(post uint) *Error {
 	return nil
 }
 
-// Add a new post
-func (self *API) AddPost(title string, body string, community string) *Error {
+// Creeate a new post
+func (self *API) CreatePost(title string, body string, community string) *Error {
 	post := &Post{
 		Author:    self.chatId,
 		AccId:     self.accId,
