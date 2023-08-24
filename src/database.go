@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/deltachat/deltachat-rpc-client-go/deltachat"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
@@ -11,19 +9,21 @@ import (
 var database *gorm.DB
 
 type Post struct {
-	Id        uint64 `gorm:"primaryKey;autoIncrement:true"`
-	Author    deltachat.ContactId
+	gorm.Model
+	Author    deltachat.ChatId
+	AccId     deltachat.AccountId
 	Title     string
 	Body      string
-	CreatedAt time.Time
-	InReplyTo uint64
-	Thread    uint64
+	InReplyTo uint
+	Thread    uint
 	Community string
 }
 
 type Like struct {
-	User deltachat.ContactId
-	Post uint64
+	User   deltachat.ChatId    `gorm:"primaryKey"`
+	AccId  deltachat.AccountId `gorm:"primaryKey"`
+	PostID uint
+	Post   Post `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
 func initDB(path string) {
@@ -34,14 +34,17 @@ func initDB(path string) {
 		panic("failed to connect database")
 	}
 
+	if res := database.Exec("PRAGMA foreign_keys = ON", nil); res.Error != nil {
+		cli.Logger.Error(res.Error.Error())
+		panic(res.Error)
+	}
+
 	// Migrate the schema
-	err = database.AutoMigrate(&Post{})
-	if err != nil {
+	if err := database.AutoMigrate(&Post{}); err != nil {
 		cli.Logger.Error(err.Error())
 		panic(err)
 	}
-	err = database.AutoMigrate(&Like{})
-	if err != nil {
+	if err := database.AutoMigrate(&Like{}); err != nil {
 		cli.Logger.Error(err.Error())
 		panic(err)
 	}

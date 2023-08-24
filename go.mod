@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9
-	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230820171819-e5d26c34ba55
+	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230822143053-73b43a6526c9
 	github.com/glebarez/sqlite v1.9.0
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2

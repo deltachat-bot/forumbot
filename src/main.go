@@ -10,14 +10,19 @@ import (
 
 var cli = botcli.New("forumbot")
 
-func main() {
+func init() {
 	cli.OnBotInit(func(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
-		initDB(filepath.Join(cli.AppDir, "bot.db"))
-		bot.On(deltachat.EventSecurejoinInviterProgress{}, onEvent)
-		bot.On(deltachat.EventWebxdcStatusUpdate{}, onEvent)
-		bot.OnNewMsg(onNewMsg)
+		onBotInit(bot, cli.AppDir)
 	})
+}
 
+func onBotInit(bot *deltachat.Bot, appDir string) {
+	initDB(filepath.Join(appDir, "bot.db"))
+	bot.OnUnhandledEvent(onEvent)
+	bot.OnNewMsg(onNewMsg)
+}
+
+func main() {
 	if err := cli.Start(); err != nil {
 		cli.Logger.Error(err)
 	}

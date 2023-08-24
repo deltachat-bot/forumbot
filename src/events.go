@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"os"
 	"path/filepath"
 
@@ -12,22 +11,19 @@ import (
 func onEvent(bot *deltachat.Bot, accId deltachat.AccountId, event deltachat.Event) {
 	switch ev := event.(type) {
 	case deltachat.EventWebxdcStatusUpdate:
-		data, err := bot.Rpc.GetWebxdcStatusUpdates(accId, ev.MsgId, ev.StatusUpdateSerial-1)
-		if err != nil {
-			cli.Logger.Error(err)
-			return
-		}
-		var rawUpdates []json.RawMessage
-		err = json.Unmarshal([]byte(data), &rawUpdates)
+		rawUpdates, err := getUpdates(bot.Rpc, accId, ev.MsgId, ev.StatusUpdateSerial-1)
 		if err != nil {
 			cli.Logger.Error(err)
 			return
 		}
 		if len(rawUpdates) > 0 {
 			handleStatusUpdate(bot, accId, ev.MsgId, rawUpdates[0])
+		} else {
+			cli.Logger.Warnf("[acc=%v] No new status update was found for event: %#v", accId, ev)
 		}
 	case deltachat.EventSecurejoinInviterProgress:
 		if ev.Progress == 1000 {
+			cli.Logger.Debugf("[acc=%v] QR scanned by contact with id=%v", accId, ev.ContactId)
 			chatId, err := bot.Rpc.CreateChatByContactId(accId, ev.ContactId)
 			if err != nil {
 				cli.Logger.Error(err)
@@ -52,6 +48,7 @@ func onNewMsg(bot *deltachat.Bot, accId deltachat.AccountId, msgId deltachat.Msg
 			return
 		}
 		if chat.ChatType == deltachat.ChatSingle {
+			cli.Logger.Debugf("[acc=%v] Got new 1:1 message: %#v", accId, msg)
 			sendApp(bot, accId, msg.ChatId)
 		}
 	}
@@ -84,6 +81,7 @@ func sendApp(bot *deltachat.Bot, accId deltachat.AccountId, chatId deltachat.Cha
 			err = bot.Rpc.ResendMessages(accId, []deltachat.MsgId{msgId})
 			if err != nil {
 				cli.Logger.Error(err)
+				break
 			}
 			return
 		} else {
