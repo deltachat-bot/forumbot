@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/deltachat/deltachat-rpc-client-go/deltachat"
+	"github.com/deltachat/deltachat-rpc-client-go/deltachat/xdcrpc"
 )
 
 type TestCallback func(bot *deltachat.Bot, botAcc deltachat.AccountId, userRpc *deltachat.Rpc, userAcc deltachat.AccountId)
@@ -56,12 +57,12 @@ func withWebxdc(callback WebxdcCallback) {
 
 // Get the Payload contained in the status update with the given serial
 func getTestPayload[T any](rpc *deltachat.Rpc, accId deltachat.AccountId, msgId deltachat.MsgId, serial uint) T {
-	rawUpdates, err := getUpdates(rpc, accId, msgId, serial-1)
+	rawUpdate, err := xdcrpc.GetUpdate(rpc, accId, msgId, serial)
 	if err != nil {
 		panic(err)
 	}
-	var update StatusUpdate[T]
-	err = json.Unmarshal(rawUpdates[0], &update)
+	var update xdcrpc.StatusUpdate[T]
+	err = json.Unmarshal(rawUpdate, &update)
 	if err != nil {
 		panic(err)
 	}
@@ -76,12 +77,14 @@ func getTestResponse[T any](rpc *deltachat.Rpc, accId deltachat.AccountId) T {
 
 // Send a status update with the given request.
 // Automatically ignore the next EventWebxdcStatusUpdate from self
-func sendTestRequest[T any](rpc *deltachat.Rpc, accId deltachat.AccountId, msgId deltachat.MsgId, req Request[T]) {
-	sendPayload(rpc, accId, msgId, req)
+func sendTestRequest(rpc *deltachat.Rpc, accId deltachat.AccountId, msgId deltachat.MsgId, req xdcrpc.Request) {
+	if err := xdcrpc.SendPayload(rpc, accId, msgId, req); err != nil {
+		panic(err)
+	}
 
 	// ignore self-update
 	ev := acfactory.WaitForEvent(rpc, accId, deltachat.EventWebxdcStatusUpdate{}).(deltachat.EventWebxdcStatusUpdate)
-	resp := getTestPayload[Request[T]](rpc, accId, ev.MsgId, ev.StatusUpdateSerial)
+	resp := getTestPayload[xdcrpc.Request](rpc, accId, ev.MsgId, ev.StatusUpdateSerial)
 	if resp.Id != req.Id {
 		panic("Unexpected request Id: " + resp.Id)
 	}

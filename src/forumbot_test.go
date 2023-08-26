@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/deltachat/deltachat-rpc-client-go/deltachat"
+	"github.com/deltachat/deltachat-rpc-client-go/deltachat/xdcrpc"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -22,15 +23,15 @@ func TestOnNewMsg(t *testing.T) {
 
 func TestWebxdcInvalidRequest(t *testing.T) {
 	withWebxdc(func(bot *deltachat.Bot, botAcc deltachat.AccountId, userRpc *deltachat.Rpc, userAcc deltachat.AccountId, msg *deltachat.MsgSnapshot) {
-		req := Request[any]{Id: "req1", Method: "invalidMethod"}
+		req := xdcrpc.Request{Id: "req1", Method: "invalidMethod"}
 		sendTestRequest(userRpc, userAcc, msg.Id, req)
-		resp := getTestResponse[ErrorResponse](userRpc, userAcc)
+		resp := getTestResponse[xdcrpc.Response](userRpc, userAcc)
 		assert.Equal(t, req.Id, resp.Id)
-		assert.Equal(t, MethodNotFoud, resp.Error.Code)
+		assert.Equal(t, xdcrpc.MethodNotFoud, resp.Error.Code)
 
-		req = Request[any]{Id: "req2", Method: MethodLike, Params: LikeParams{Post: 1}}
+		req = xdcrpc.Request{Id: "req2", Method: "Like", Params: []any{1}}
 		sendTestRequest(userRpc, userAcc, msg.Id, req)
-		resp = getTestResponse[ErrorResponse](userRpc, userAcc)
+		resp = getTestResponse[xdcrpc.Response](userRpc, userAcc)
 		assert.Equal(t, req.Id, resp.Id)
 		assert.Equal(t, SQLError, resp.Error.Code)
 	})
@@ -38,15 +39,15 @@ func TestWebxdcInvalidRequest(t *testing.T) {
 
 func TestWebxdc(t *testing.T) {
 	withWebxdc(func(bot *deltachat.Bot, botAcc deltachat.AccountId, userRpc *deltachat.Rpc, userAcc deltachat.AccountId, msg *deltachat.MsgSnapshot) {
-		params := CreatePostParams{Title: "Test Post", Body: "Test Body", Community: "en"}
-		req := Request[any]{Id: "req1", Method: MethodCreatePost, Params: params}
+		params := []any{"Test Post", "Test Body", "en"}
+		req := xdcrpc.Request{Id: "req1", Method: "CreatePost", Params: params}
 		sendTestRequest(userRpc, userAcc, msg.Id, req)
 		resp := getTestResponse[map[string]any](userRpc, userAcc)
 		assert.Contains(t, resp, "id")
 		assert.Equal(t, req.Id, resp["id"])
 		assert.Contains(t, resp, "result")
 
-		req = Request[any]{Id: "req2", Method: MethodLike, Params: LikeParams{Post: 1}}
+		req = xdcrpc.Request{Id: "req2", Method: "Like", Params: []any{1}}
 		sendTestRequest(userRpc, userAcc, msg.Id, req)
 		resp = getTestResponse[map[string]any](userRpc, userAcc)
 		assert.Contains(t, resp, "id")
