@@ -8,14 +8,9 @@ github.com/creachadair/mds v0.0.1/go.mod h1:caBACU+n1Q/rZ252FTzfnG0/H+ZUi+UnIQtE
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9 h1:ZEvCVUwduEw3YJ5WTlUj2h7p7oO1hr9h18qgPQ3thco=
-github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9/go.mod h1:86R9UEPh+8pBcuZacG2RukJMKg8QR1PRLv/sOAF9ihg=
 github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230826132412-bc8c1ef83f08 h1:ryqD/ZHqvvv8AuCgsvp9q5PUxOiNCH+S0ek8aXd6tD4=
 github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230826132412-bc8c1ef83f08/go.mod h1:f7XD5P8f1R2i91T1+WsDXnvJCiRgSgGBmgd4Xf3ibFY=
-github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230822143053-73b43a6526c9 h1:wlLdOxVQcqorvipBkAsLCF6CTgemzfzz8JPAXl8+vjQ=
-github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230822143053-73b43a6526c9/go.mod h1:2ISiMA742xpBiTP+KOLiTSNfZdKZChh6cnuvA10sqkA=
-github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230825233722-06a7d559209e h1:qcnTLPO+OrQJ4Q9rvPihyb64AVAQDUpcoRxPHQGXsIw=
-github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230825233722-06a7d559209e/go.mod h1:2ISiMA742xpBiTP+KOLiTSNfZdKZChh6cnuvA10sqkA=
+github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230825233829-24baa9b81c67 h1:YWmtYP75pdSV9/HAk7799QUJd6XGxq9lK6GRdw/Ppho=
 github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230825233829-24baa9b81c67/go.mod h1:2ISiMA742xpBiTP+KOLiTSNfZdKZChh6cnuvA10sqkA=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
