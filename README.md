@@ -2,7 +2,7 @@
 
 ![Latest release](https://img.shields.io/github/v/tag/deltachat-bot/forumbot?label=release)
 [![CI](https://github.com/deltachat-bot/forumbot/actions/workflows/ci.yml/badge.svg)](https://github.com/deltachat-bot/forumbot/actions/workflows/ci.yml)
-![Coverage](https://img.shields.io/badge/Coverage-61.5%25-yellow)
+![Coverage](https://img.shields.io/badge/Coverage-54.9%25-yellow)
 [![Go Report Card](https://goreportcard.com/badge/github.com/deltachat-bot/forumbot)](https://goreportcard.com/report/github.com/deltachat-bot/forumbot)
 
 ## Install
